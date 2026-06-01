@@ -1,0 +1,42 @@
+{
+  "extends": ["eslint:recommended", "prettier"],
+  "plugins": ["prettier"],
+  "env": {
+    "es2020": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "settings": {
+    "node": {
+      "version": ">=14.0.0"
+    }
+  },
+  "rules": {
+    "node/no-unsupported-features/es-syntax": [
+      "error",
+      { "version": ">=14.0.0" }
+    ],
+    "prettier/prettier": "warn",
+    "spaced-comment": "off",
+    "no-console": "off",
+    "consistent-return": "off",
+    "func-names": "off",
+    "object-shorthand": "off",
+    "no-process-exit": "off",
+    "no-param-reassign": "off",
+    "no-return-await": "off",
+    "no-underscore-dangle": "off",
+    "class-methods-use-this": "off",
+    "no-multiple-empty-lines": ["warn", { "max": 2, "maxEOF": 1 }],
+    "prefer-destructuring": "off",
+    "endOfLine": "auto",
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "req|res|next|val" }],
+    "no-undef": "error",
+    "no-use-before-define": [
+      "error",
+      { "functions": true, "classes": true, "variables": true }
+    ]
+  }
+}
