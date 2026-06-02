@@ -15,10 +15,9 @@ const bookBtn = document.getElementById('book-tour');
 
 // DELEGATIONS
 if (mapBox) {
-  const locations = JSON.parse(
-    document.getElementById('map').dataset.locations,
-  );
-  displayMap(locations);
+  const locations = JSON.parse(mapBox.dataset.locations);
+  const mapboxToken = mapBox.dataset.mapboxToken;
+  displayMap(locations, mapboxToken);
 }
 
 if (loginForm)
