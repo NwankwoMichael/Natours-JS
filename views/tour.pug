@@ -71,7 +71,9 @@ block content
 
 
     section.section-map
-        #map(data-locations=`${JSON.stringify(tour.locations)}`, data-mapbox-token ='!{process.env.MAPBOX_ACCESS_TOKEN}')
+        #map(
+            data-locations=`${JSON.stringify(tour.locations)}`, data-mapbox-token=mapboxToken
+        )
         
 
     section.section-reviews
