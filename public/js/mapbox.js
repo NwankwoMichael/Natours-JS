@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-export const displayMap = (location, token) => {
+export const displayMap = (locations, token) => {
   mapboxgl.accessToken = token;
 
   const map = new mapboxgl.Map({
@@ -14,7 +14,7 @@ export const displayMap = (location, token) => {
 
   const bounds = new mapboxgl.LngLatBounds();
 
-  location.forEach((loc) => {
+  locations.forEach((loc) => {
     // Create marker
     const el = document.createElement('div');
     el.className = 'marker';
