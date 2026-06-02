@@ -3,6 +3,7 @@ include _reviewCard
 
 block append head
     script(src='https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js')
+
     link(rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css')
 
 
@@ -71,6 +72,8 @@ block content
 
     section.section-map
         #map(data-locations=`${JSON.stringify(tour.locations)}`)
+    script.
+        const mapboxToken = '!{process.env.MAPBOX_ACCESS_TOKEN}';
 
     section.section-reviews
         .reviews
