@@ -50,7 +50,7 @@ exports.signup = catchAsync(async (req, res) => {
 
   // Send email via Email class
   const url = `${req.protocol}://${req.get('host')}/me`;
-  console.log(url);
+  // console.log(url);
   console.log('Sending mail to:', newUser.email);
   await new Email(newUser, url).sendWelcome();
 
