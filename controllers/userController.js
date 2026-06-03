@@ -45,7 +45,10 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
     .resize(500, 500)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
-    .toFile(path.join(__dirname, `../public/img/users`, req.file.filename));
+    // .toFile(path.join(__dirname, `../public/img/users`, req.file.filename));
+    .toFile(
+      path.join(process.cwd(), 'public', 'img', 'users', req.file.filename),
+    );
 
   next();
 });
