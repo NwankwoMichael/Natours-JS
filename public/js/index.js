@@ -73,10 +73,10 @@ if (userPasswordForm)
 
 if (bookBtn)
   bookBtn.addEventListener('click', (e) => {
-    //
+    // style the display text
     e.target.textContent = 'Processing...';
     //Get tour id
-    const { tourId } = e.target.dataset;
+    const { tourId, stripePublicKey } = e.target.dataset;
     // Call bookTour
-    bookTour(tourId);
+    bookTour(tourId, stripePublicKey);
   });

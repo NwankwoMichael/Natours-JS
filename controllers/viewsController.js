@@ -34,7 +34,10 @@ exports.getTour = catchAsync(async (req, res, next) => {
   res.status(200).render('tour', {
     title: `${tour.name} Tour`,
     tour,
+    // Inject mapbox access token from back-end
     mapboxToken: process.env.MAPBOX_ACCESS_TOKEN,
+    // Inject strip public key from back-end
+    stripePublicKey: process.env.STRIPE_PUBLIC_KEY,
   });
 });
 

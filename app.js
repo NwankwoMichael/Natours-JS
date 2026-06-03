@@ -37,6 +37,7 @@ app.use(
       scriptSrc: [
         "'self'",
         'https://api.mapbox.com',
+        'https://*.mapbox.com',
         'https://cdn.jsdelivr.net',
         'https://js.stripe.com',
       ],
@@ -45,6 +46,7 @@ app.use(
         "'self'",
         "'unsafe-inline'",
         'https://api.mapbox.com',
+        'https://*.mapbox.com',
         'https://fonts.googleapis.com',
       ],
       fontSrc: ["'self'", 'https://fonts.gstatic.com'],
@@ -54,10 +56,14 @@ app.use(
         'https://api.mapbox.com',
         'https://events.mapbox.com',
         'https://cdn.jsdelivr.net',
-        'ws://127.0.0.1:1234', // 👈 add this
-        'ws://localhost:1234', // 👈 add this too, just in case
+        'https://*.mapbox.com', // This covers a.tiles, b.tiles, api, and events
+        'https://api.stripe.com',
+        'ws://127.0.0.1:1234',
+        'ws://localhost:1234',
       ],
       workerSrc: ["'self'", 'blob:'],
+      childSrc: ["'self'", 'blob:'],
+      imgSrc: ["'self'", 'data:', 'blob:', 'https://*.mapbox.com'],
     },
   }),
 );

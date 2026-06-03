@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { showAlert } from './alert';
 
-const stripe = Stripe(`${process.env.STRIPE_PUBLIC_KEY}`);
-
-export const bookTour = async (tourId) => {
+export const bookTour = async (tourId, stripePublicKey) => {
   try {
+    // Initialize stripe dynamically using passed public key
+    const stripe = window.Stripe(stripePublicKey);
+
     // Get checkout session from server
     const session = await axios(`/api/v1/bookings/checkout-session/${tourId}`);
 

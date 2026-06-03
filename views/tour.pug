@@ -94,7 +94,7 @@ block content
 
         //- Ensuring book tour btn only appears when user is logged in
         if user
-            button.btn.btn--green.span-all-rows#book-tour(data-tour-id=`${tour.id}`) Book tour now!
+            button.btn.btn--green.span-all-rows#book-tour(data-tour-id=`${tour.id}` data-stripe-public-key=`${stripePublicKey}`) Book tour now!
         else 
             //- btn only directs to login page
             a.btn.btn--green.spam-all-rows(href=`/login`) Log in to book tour
