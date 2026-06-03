@@ -1,6 +1,9 @@
 /* eslint-disable */
 
 export const displayMap = (locations, token) => {
+  // Add mapping line
+  const mapboxgl = window.mapboxgl;
+
   mapboxgl.accessToken = token;
 
   const map = new mapboxgl.Map({

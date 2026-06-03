@@ -15,11 +15,14 @@ const bookBtn = document.getElementById('book-tour');
 
 // DELEGATIONS
 if (mapBox) {
-  const locations = JSON.parse(
-    document.getElementById('map').dataset.locations,
-  );
-  const mapboxToken = document.getElementById('map').dataset.mapboxToken;
-  displayMap(locations, mapboxToken);
+  // Force execution only after CDN Library loads completely
+  if (typeof window.mapboxgl !== 'undefined') {
+    const locations = JSON.parse(mapBox.dataset.locations);
+    const mapboxToken = mapBox.dataset.mapboxToken;
+    displayMap(locations, mapboxToken);
+  } else {
+    console.error('Mapbox script not loaded from CDN');
+  }
 }
 
 if (loginForm)
