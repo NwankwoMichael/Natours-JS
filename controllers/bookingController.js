@@ -1,8 +1,10 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Tour = require('../models/tourModel');
+const User = require('../models/userModel');
 const Booking = require('../models/bookingModel');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
+const User = require('../models/userModel');
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   // GET THE CURRENTLY BOOKED TOUR
@@ -14,7 +16,9 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     payment_method_types: ['card'],
 
     // redirect to home page when payment is successful & create booking
-    success_url: `${req.protocol}://${req.get('host')}/?tour=${req.params.tourId}&user=${req.user.id}&price=${tour.price}`,
+    // success_url: `${req.protocol}://${req.get('host')}/?tour=${req.params.tourId}&user=${req.user.id}&price=${tour.price}`,
+
+    success_url: `${req.protocol}://${req.ger('host')}/?tours`,
 
     // redirect to tour page if user decides to cancel payment
     cancel_url: `${req.protocol}://${req.get('host')}/tour/${tour.slug}`,
@@ -51,20 +55,50 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 });
 
 // UNSECURE TEMPORARY Function THat creates Booking in The Database
-exports.createBookingCheckout = catchAsync(async (req, res, next) => {
-  // Getting the data from the query string
-  const { tour, user, price } = req.query;
+// exports.createBookingCheckout = catchAsync(async (req, res, next) => {
+//   // Getting the data from the query string
+//   const { tour, user, price } = req.query;
 
-  // Create a booking if all the above are specified
-  if (!tour && !user && !price) return next();
+//   // Create a booking if all the above are specified
+//   if (!tour && !user && !price) return next();
 
+//   await Booking.create({ tour, user, price });
+
+//   // Redirect to the home page splitting the queryString by the ?mark
+//   res.redirect(req.originalUrl.split('?')[0]);
+
+//   // res.redirect makes another request to the specified url which in this case is the first array element of the split query string before the ?mark
+// });
+
+const createBookingCheckout = async (session) => {
+  // Initialize the query parameters
+  const tour = session.client_reference_id;
+  const user = (await User.findOne({ email: session.customer_email })).id;
+  const price = session.amount_total / 100;
+
+  // Create booking via the query parameters
   await Booking.create({ tour, user, price });
+};
 
-  // Redirect to the home page splitting the queryString by the ?mark
-  res.redirect(req.originalUrl.split('?')[0]);
+exports.webhookCheckout = (req, res, next) => {
+  const signature = req.headers['stripe-signature'];
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(
+      req.body,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET,
+    );
+  } catch (err) {
+    return res.status(400).send(`webhook error: ${err.message}`);
+  }
 
-  // res.redirect makes another request to the specified url which in this case is the first array element of the split query string before the ?mark
-});
+  if (event.type === 'checkout.session.completed') {
+    createBookingCheckout(event.data.object);
+  }
+
+  res.status(200).json({ received: true });
+};
 
 exports.createBooking = factory.createOne(Booking);
 
