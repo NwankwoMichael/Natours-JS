@@ -17,7 +17,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     // redirect to home page when payment is successful & create booking
     // success_url: `${req.protocol}://${req.get('host')}/?tour=${req.params.tourId}&user=${req.user.id}&price=${tour.price}`,
 
-    success_url: `${req.protocol}://${req.ger('host')}/?tours`,
+    success_url: `${req.protocol}://${req.get('host')}/?tours`,
 
     // redirect to tour page if user decides to cancel payment
     cancel_url: `${req.protocol}://${req.get('host')}/tour/${tour.slug}`,
@@ -37,7 +37,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
             name: `${tour.name} Tour`,
             description: tour.summary,
             images: [
-              `${req.protocol}://${req.ger('host')}/img/tours/${tour.imageCover}`,
+              `${req.protocol}://${req.get('host')}/img/tours/${tour.imageCover}`,
             ],
           },
           unit_amount: tour.price * 100, //We multiply by 100 cos default=cents
