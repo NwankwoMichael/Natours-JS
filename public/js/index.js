@@ -4,6 +4,7 @@ import { displayMap } from './mapbox';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
+import { showAlert } from './alert';
 
 // DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -12,6 +13,7 @@ const logoutBtn = document.querySelector('.nav__el--logout');
 const userUpdateForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
+const bodyEl = document.querySelector('body');
 
 // DELEGATIONS
 if (mapBox) {
@@ -80,3 +82,6 @@ if (bookBtn)
     // Call bookTour
     bookTour(tourId, stripePublicKey);
   });
+
+const alertMessage = bodyEl.dataset.alert;
+if (alert) showAlert('success', alertMessage, 20);

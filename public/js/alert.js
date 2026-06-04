@@ -6,12 +6,12 @@ export const hideAlert = () => {
 };
 
 // Type = "success" || "error"
-export const showAlert = (type, message) => {
+export const showAlert = (type, message, time = 7) => {
   // Always hide old alert whenever new alert shows up
   hideAlert();
   const markup = `<div class="alert alert--${type}">${message}</div>`;
   document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
 
   //   Hide all alerts after 5 secs
-  window.setTimeout(hideAlert, 5000);
+  window.setTimeout(hideAlert, time * 1000);
 };

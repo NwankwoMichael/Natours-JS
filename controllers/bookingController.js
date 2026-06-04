@@ -17,7 +17,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     // redirect to home page when payment is successful & create booking
     // success_url: `${req.protocol}://${req.get('host')}/?tour=${req.params.tourId}&user=${req.user.id}&price=${tour.price}`,
 
-    success_url: `${req.protocol}://${req.get('host')}/?tours`,
+    success_url: `${req.protocol}://${req.get('host')}/?tours?alert=booking`,
 
     // redirect to tour page if user decides to cancel payment
     cancel_url: `${req.protocol}://${req.get('host')}/tour/${tour.slug}`,
