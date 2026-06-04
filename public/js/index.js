@@ -13,7 +13,6 @@ const logoutBtn = document.querySelector('.nav__el--logout');
 const userUpdateForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
-const bodyEl = document.querySelector('body');
 
 // DELEGATIONS
 if (mapBox) {
@@ -83,5 +82,5 @@ if (bookBtn)
     bookTour(tourId, stripePublicKey);
   });
 
-const alertMessage = bodyEl.dataset.alert;
+const alertMessage = document.querySelector('body').dataset.alert;
 if (alertMessage) showAlert('success', alertMessage, 20);
