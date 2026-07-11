@@ -205,7 +205,7 @@ exports.getDistances = catchAsync(async (req, res, next) => {
 
   // Check that lat and lng exists
   if (!lat || !lng)
-    next(
+    return next(
       new AppError(
         'Please provide a latitude and longitude in the format lat,lng.',
         400,

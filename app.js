@@ -27,7 +27,7 @@ app.set('trust proxy', 1); // trust first proxy
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
-// 1) GLOBAL MIDDLEWARES
+// 1) ///////////// GLOBAL MIDDLEWARES //////////////
 // Implement CORS
 app.use(cors()); // for so-called simple request
 

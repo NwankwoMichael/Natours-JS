@@ -71,7 +71,7 @@ userSchema.pre('save', function () {
   if (!this.isModified('password') || this.isNew) {
     return;
 
-    (this, (passwordChangedAt = Date.now() - 1000));
+    // (this, (passwordChangedAt = Date.now() - 1000));
   }
 
   // Put passwordChangedAt 1 secs in the past

@@ -30,7 +30,7 @@ const createSendToken = (user, statusCode, req, res) => {
     // Testing for secure https connection during production
     {
       expires: new Date(
-        Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
+        Date.now() + +process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
       ),
       httpOnly: true, // Ensures cookie can't be tampered with
       secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
